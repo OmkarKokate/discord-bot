@@ -1,0 +1,50 @@
+import discord
+import datetime
+import json
+from datetime import datetime
+from discord.ext import commands
+
+with open('config.json', 'r') as config:
+    get = json.load(config)
+
+prefix = get['prefix']
+code = get['code']
+
+class BotInfo(commands.Cog):
+
+    def __init__(self, client):
+        self.client = client
+
+    @commands.command()
+    @commands.guild_only()
+    async def help(self, ctx):
+        embed = discord.Embed(colour=discord.Colour.blue())
+        embed.add_field(name="Moderation:", value="`$clear <amount>` - Clear recent messages from chat\n`$kick <user> <reason>` - Kick a user from the server\n`$ban <user> <reason>` - Ban a user from the server\n`$unban <user>` - Unban a user from the server\n`$mute <user>` -  Mute a user in text and voice channels\n`$unmute <user>` - Unmute a user\n`$nick <user> <nickname>` - Change a users nickname", inline=False)
+        embed.add_field(name="Information:", value="`$whois <user>` -  Display information about a user\n`$av <user>` Display a users avatar\n`$serverinfo` - Display information about the server\n`$users` - Display the number of users in the server", inline=False)
+        embed.add_field(name="Games & Misc:", value="`$8ball <question>` - Ask the bot a question\n`$coinflip <heads/tails>` - Flip a coin\n`$rps <choice>` - Play a game of rock paper scissors\n`$calculate <equasion>` - Calculate an equasion", inline=False)
+        embed.add_field(name="Bot-Related:", value="`$help` - Display all commands and what they do\n`$uptime` - The amount of time since last restart\n`$ping` - The bots latency / response time\n`$source` -  Get a link to the bots source code", inline=False)
+        return await ctx.reply(embed=embed)
+
+    @commands.command()
+    @commands.guild_only()
+    async def ping(self, ctx):
+        await ctx.reply(f'Pong! \({round(self.client.latency * 1000)}ms\)')
+
+    @commands.command()
+    @commands.guild_only()
+    async def uptime(self, ctx):
+        delta_uptime = datetime.utcnow() - self.client.launch_time
+        hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
+        minutes, seconds = divmod(remainder, 60)
+        days, hours = divmod(hours, 24)
+        await ctx.reply(f"{days}d, {hours}h, {minutes}m, {seconds}s")
+
+    @commands.command(aliases=["code"])
+    @commands.guild_only()
+    async def source(self, ctx):
+        embed = discord.Embed(colour=discord.Color.blurple())
+        embed.description = f"Coming soon - Not public yet"
+        return await ctx.reply(embed=embed)
+
+def setup(client):
+    client.add_cog(BotInfo(client))
