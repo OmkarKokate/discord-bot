@@ -1,0 +1,22 @@
+{
+    "token" : "",
+    "prefix" : "$",
+    "code" : "https://github.com/syn4/bot",
+
+    "status1" : "",
+    "status2" : "",
+    "status3" : "",
+    "status4" : "",
+    "status5" : "",
+
+    "8ball_response_one" : "It is certain.",
+    "8ball_response_two" : "For sure",
+    "8ball_response_three" : "Without a doubt",
+    "8ball_response_four" : "Yes definitely",
+    "8ball_response_five" : "Chances are low",
+    "8ball_response_six" : "Wouldnt count on it.",
+    "8ball_response_seven" : "Nope",
+    "8ball_response_eight" : "Probably",
+    "8ball_response_nine" : "I dont think so",
+    "8ball_response_ten" : "Unfortunately not"
+}
