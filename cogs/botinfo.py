@@ -43,7 +43,7 @@ class BotInfo(commands.Cog):
     @commands.guild_only()
     async def source(self, ctx):
         embed = discord.Embed(colour=discord.Color.blurple())
-        embed.description = f"Coming soon - Not public yet"
+        embed.description = f"[Click here to view bots source code!]({code})"
         return await ctx.reply(embed=embed)
 
 def setup(client):
